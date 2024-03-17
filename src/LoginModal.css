@@ -1,0 +1,32 @@
+.paper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 500px;
+    margin: auto;
+    top: 50%;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+ 
+  
+  .button {
+    margin-top: 16px !important;
+  }
+
+  .form{
+    box-shadow: none !important;
+    margin: auto;
+  }
+  
+  /* Adjustments for smaller screens */
+  @media (max-width: 600px) {
+    .paper {
+      width: 90%;
+    }
+  }
+  
+  .MuiTabs-root{
+    margin-bottom: 20px;
+  }

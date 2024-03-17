@@ -1,0 +1,26 @@
+.next-page-loader-container {
+  display: flex;
+  justify-content: center;
+  flex: 1;
+  height: 100%;
+  align-items: center;
+}
+.next-page-loader {
+  border: 10px solid rgb(216, 213, 213); /* Light grey */
+  border-top: 10px solid rgb(55, 55, 227); /* Blue */
+  border-radius: 50%;
+  width: 50px;
+  top: 50%;
+  left: 50%;
+  height: 50px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
