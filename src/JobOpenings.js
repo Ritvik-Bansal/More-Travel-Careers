@@ -25,6 +25,22 @@ const JobOpenings = () => {
   const [loaded, setLoaded] = useState(false);
   const [open, setOpen] = useState(false);
   const user = getUser();
+  const [searchTerm, setSearchTerm] = useState('');
+
+  // Filter the job listings based on the search term
+  const filteredJobs = useMemo(() => {
+    if (!jobs) return [];
+    return jobs.filter(
+      (job) =>
+        job.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        job.location.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+  }, [jobs, searchTerm]);
+
+  // Handle search term change
+  const handleSearchTermChange = (event) => {
+    setSearchTerm(event.target.value);
+  };
 
   const handleOpen = () => {
     setOpen(true);
@@ -103,8 +119,15 @@ const JobOpenings = () => {
 
       <section id="job-openings">
         {!jobs && <LoadingPage />}
+        <input
+          type="text"
+          placeholder="Search jobs..."
+          value={searchTerm}
+          onChange={handleSearchTermChange}
+          className="search-bar"
+        />
         <ul2>
-          {jobs?.map((job) => (
+          {filteredJobs?.map((job) => (
             <li2 data-location={job.location}>
               <h3>{job.name}</h3>
               <h5>

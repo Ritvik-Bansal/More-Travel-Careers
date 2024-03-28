@@ -20,6 +20,91 @@ function validateForm() {
   return true; // Return true if all controls are filled
 }
 
+const parseResumeTemplate = (resumeText) => {
+  const lines = resumeText.split('\n');
+  const obj = {
+    address: '',
+    coverLetter: '',
+    date: '',
+    interests: '',
+    role: 'student',
+    summary: '',
+    questions: '',
+    certifications: '',
+    institution: '',
+    name: '',
+    email: '',
+    phone: '',
+    awards: '',
+    skills: '',
+    statement: '',
+    degree: '',
+    coursework: '',
+    position: '',
+  };
+
+  lines.forEach((line) => {
+    const [key, value] = line.split(':').map((item) => item.trim());
+    if (!value) return;
+    switch (key) {
+      case 'Name':
+        obj.name = value;
+        break;
+      case 'Address':
+        obj.address = value;
+        break;
+      case 'E-mail':
+        obj.email = value;
+        break;
+      case 'Phone-Number':
+        obj.phone = value;
+        break;
+      case 'Objective Statement':
+        obj.statement = value;
+        break;
+      case 'Professional Summary':
+        obj.summary = value;
+        break;
+      case '•\tDegree earned':
+        console.log({ value });
+        obj.degree = value;
+        break;
+      case '•\tInstitution':
+        obj.institution = value;
+        break;
+      case '•\tName of University of College':
+        obj.institution = value;
+        break;
+      case '•\tYear of Graduation':
+        obj.date = value;
+        break;
+      case '•\tRelevant Coursework':
+        obj.coursework = value;
+        break;
+      case 'Skills':
+        obj.skills = value.split(',').map((skill) => skill.trim());
+        break;
+      case 'Certifications':
+        obj.certifications = value.split(',').map((cert) => cert.trim());
+        break;
+      case 'Awards':
+        obj.awards = value.split(',').map((award) => award.trim());
+        break;
+      case 'Personal Interests':
+        obj.interests = value;
+        break;
+      case 'Position Applied':
+        obj.position = value;
+        break;
+      default:
+        // Ignore other fields
+        break;
+    }
+  });
+
+  return obj;
+};
+
 const Apply = ({ prefilled = false }) => {
   const [formData, setFormData] = useState({
     name: '',
@@ -41,8 +126,8 @@ const Apply = ({ prefilled = false }) => {
     position: '',
     questions: '',
   });
-  const navigate = useNavigate();
 
+  const navigate = useNavigate();
 
   const param = useParams();
   useEffect(() => {
@@ -63,6 +148,17 @@ const Apply = ({ prefilled = false }) => {
       getApplications();
     }
   }, [prefilled]);
+
+  const handleFileChange = async (event) => {
+    const file = event.target.files[0];
+    const reader = new FileReader();
+    reader.onload = async (e) => {
+      const content = e.target.result;
+      const fData = parseResumeTemplate(content);
+      setFormData(fData);
+    };
+    reader.readAsText(file);
+  };
 
   function handleChange(event) {
     const { id, value } = event.target;
@@ -91,7 +187,7 @@ const Apply = ({ prefilled = false }) => {
       navigate('/');
     } catch (e) {
       console.error('Error adding document: ', e);
-      alert("Something went wrong, please try again")
+      alert('Something went wrong, please try again');
     }
   }
 
@@ -103,6 +199,15 @@ const Apply = ({ prefilled = false }) => {
         <h2>Please login to apply.</h2>
       ) : (
         <form id="form" onSubmit={onSubmit}>
+          <label htmlFor="resume" id="label-resume">
+            Upload Resume
+          </label>
+          <br />
+          <br />
+          <input id="resume" type="file" onChange={handleFileChange} />
+          <br /> <br />
+          {/* 
+          <h3>OR</h3> */}
           <fieldset disabled={prefilled} style={{ border: 'none' }}>
             <div class="form-control">
               <label
