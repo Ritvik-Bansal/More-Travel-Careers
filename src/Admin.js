@@ -107,9 +107,9 @@ const JobForm = () => {
               value={location}
               onChange={(e) => setLocation(e.target.value)}
             >
-              <MenuItem value="Seattle">Seattle</MenuItem>
-              <MenuItem value="New Delhi">New Delhi</MenuItem>
-              <MenuItem value="Edmonton">Edmonton</MenuItem>
+              <MenuItem value="Seattle, WA">Seattle, WA</MenuItem>
+              <MenuItem value="New Delhi, India">New Delhi, India</MenuItem>
+              <MenuItem value="Edmonton, AB">Edmonton, AB</MenuItem>
             </Select>
           </FormControl>
 
