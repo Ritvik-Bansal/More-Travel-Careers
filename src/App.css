@@ -68,7 +68,7 @@ body.home-page {
   position: relative;
   background: url('/public/main-images/careers.png') top center no-repeat;
   background-size: 100%; /* Adjust to 'cover', 'auto', '50%', etc. based on your preference */
-  height: 360px; /* Adjust the height as needed */
+  height: 300px; /* Adjust the height as needed */
   overflow: hidden; /* Ensure that the text overlay doesn't overflow */
 }
 
@@ -77,7 +77,7 @@ body.home-page {
   position: relative;
   background: url('/public/main-images/benefits.png') top center no-repeat;
   background-size: 100%; /* Adjust to 'cover', 'auto', '50%', etc. based on your preference */
-  height: 400px; /* Adjust the height as needed */
+  height: 300px; /* Adjust the height as needed */
   overflow: hidden; /* Ensure that the text overlay doesn't overflow */
 }
 
@@ -86,7 +86,7 @@ body.home-page {
   position: relative;
   background: url('/public/main-images/culture.png') top center no-repeat;
   background-size: 100%; /* Adjust to 'cover', 'auto', '50%', etc. based on your preference */
-  height: 400px; /* Adjust the height as needed */
+  height: 300px; /* Adjust the height as needed */
   overflow: hidden; /* Ensure that the text overlay doesn't overflow */
 }
 
@@ -95,7 +95,7 @@ body.home-page {
   position: relative;
   background: url('/public/main-images/diversity.png') top center no-repeat;
   background-size: 100%; /* Adjust to 'cover', 'auto', '50%', etc. based on your preference */
-  height: 400px; /* Adjust the height as needed */
+  height: 300px; /* Adjust the height as needed */
   overflow: hidden; /* Ensure that the text overlay doesn't overflow */
 }
 
@@ -104,7 +104,7 @@ body.home-page {
   position: relative;
   background: url('/public/main-images/flexible-work.png') top center no-repeat;
   background-size: 100%; /* Adjust to 'cover', 'auto', '50%', etc. based on your preference */
-  height: 400px; /* Adjust the height as needed */
+  height: 300px; /* Adjust the height as needed */
   overflow: hidden; /* Ensure that the text overlay doesn't overflow */
 }
 
@@ -113,7 +113,7 @@ body.home-page {
   position: relative;
   background: url('/public/main-images/hiring-tips.png') top center no-repeat;
   background-size: 100%; /* Adjust to 'cover', 'auto', '50%', etc. based on your preference */
-  height: 400px; /* Adjust the height as needed */
+  height: 300px; /* Adjust the height as needed */
   overflow: hidden; /* Ensure that the text overlay doesn't overflow */
 }
 
@@ -122,7 +122,7 @@ body.home-page {
   position: relative;
   background: url('/public/main-images/internships.png') top center no-repeat;
   background-size: 100%; /* Adjust to 'cover', 'auto', '50%', etc. based on your preference */
-  height: 400px; /* Adjust the height as needed */
+  height: 300px; /* Adjust the height as needed */
   overflow: hidden; /* Ensure that the text overlay doesn't overflow */
 }
 
@@ -131,7 +131,7 @@ body.home-page {
   position: relative;
   background: url('/public/main-images/job-openings.png') top center no-repeat;
   background-size: 100%; /* Adjust to 'cover', 'auto', '50%', etc. based on your preference */
-  height: 400px; /* Adjust the height as needed */
+  height: 300px; /* Adjust the height as needed */
   overflow: hidden; /* Ensure that the text overlay doesn't overflow */
 }
 
@@ -140,7 +140,7 @@ body.home-page {
   position: relative;
   background: url('/public/main-images/testimonials.png') top center no-repeat;
   background-size: 100%; /* Adjust to 'cover', 'auto', '50%', etc. based on your preference */
-  height: 400px; /* Adjust the height as needed */
+  height: 300px; /* Adjust the height as needed */
   overflow: hidden; /* Ensure that the text overlay doesn't overflow */
 }
 
@@ -149,7 +149,7 @@ body.home-page {
   position: relative;
   background: url('/public/main-images/application.png') top center no-repeat;
   background-size: 100%; /* Adjust to 'cover', 'auto', '50%', etc. based on your preference */
-  height: 400px; /* Adjust the height as needed */
+  height: 300px; /* Adjust the height as needed */
   overflow: hidden; /* Ensure that the text overlay doesn't overflow */
 }
 
