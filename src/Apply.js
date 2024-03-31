@@ -200,7 +200,7 @@ const Apply = ({ prefilled = false }) => {
       ) : (
         <form id="form" onSubmit={onSubmit}>
           <label htmlFor="resume" id="label-resume">
-            Upload Resume
+            Upload you Resume and Information will automatically be filled in!
           </label>
           <br />
           <br />
