@@ -1,0 +1,213 @@
+.user-info-container {
+    margin-left: 24px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    cursor: pointer;
+}
+
+.user-image-container {
+    height: 40px;
+    width: 40px;
+    background-color: #d9d9d9;
+    border-radius: 50%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.info-text-container {
+    margin-left: 12px;
+    font-weight: 400;
+    color: black;
+
+}
+
+.user-info-down-icon {
+    margin-left: 12px;
+    font-size: 16px;
+    color: black;
+}
+
+.user-name {
+    font-size: 14px;
+}
+
+.user-id {
+    font-size: 12px;
+    margin-top: 4px;
+}
+
+
+.dropdown-menu-base {
+    position: relative;
+    width: 100%;
+
+}
+
+.click-outside-base {
+    z-index: 10;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    cursor: auto;
+}
+
+.dropdown-menu-container {
+    position: absolute;
+    background: white;
+    border: 1px solid white;
+    box-shadow:
+        0px 2px 5px rgba(0, 0, 0, 0.04),
+        0px 16px 24px rgba(0, 0, 0, 0.16);
+    border-radius: 6px;
+    padding: 8px;
+    z-index: 11;
+}
+
+.flat {
+    border-radius: 0;
+}
+
+.alignment-left {
+    left: 0;
+}
+
+.alignment-right {
+    right: 0;
+}
+
+.user-profile-container {
+    color: var(--text-color-main);
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.user-profile-image-container {
+    font-size: 40px;
+    background-color: var(--background-color-main);
+    height: 60px;
+    width: 60px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    color: var(--text-color-main-on-dark);
+    margin-top: 32px;
+}
+
+.user-profile-name {
+    margin-top: 20px;
+    font-weight: 700;
+}
+
+.expiry-container {
+    margin-top: 4px;
+
+}
+
+.expiry-label {
+    font-weight: 600;
+}
+
+.logout-button {
+    margin-top: 36px;
+    width: 92%;
+    justify-content: center;
+    margin-bottom: 16px;
+} 
+
+
+/* Header styles */
+.header-content {
+    display: flex;
+    align-items: center;
+  }
+  
+  #company-logo {
+    max-width: 100px; /* Adjust as needed */
+  }
+  
+  nav {
+    display: none; /* Hide the default navigation on larger screens */
+  }
+  
+  .dropdown {
+    display: none; /* Hide the dropdown on larger screens */
+  }
+  
+
+  
+  /* Mobile Navigation Drawer styles */
+  .mobile-drawer {
+    display: none; /* Hide drawer by default */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 80%; /* Adjust as needed */
+    height: 100%;
+    background-color: white;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+  }
+  
+  .drawer-header {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+  }
+  
+  .drawer-header img {
+    max-width: 80px; /* Adjust as needed */
+  }
+  
+  .drawer-close-btn {
+    cursor: pointer;
+    font-size: 1.5rem;
+  }
+  
+  .drawer-nav {
+    padding: 20px;
+  }
+  
+  .drawer-nav a {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+    color: #333;
+    text-decoration: none;
+  }
+  
+  /* Show drawer when it's open */
+  .mobile-drawer.open {
+    display: block;
+  }
+  
+  /* Hide drawer toggle button on larger screens */
+  .drawer-toggle-btn {
+    display: block; /* Adjust as needed based on your design */
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
+  
+  /* Adjust drawer toggle button position based on your design */
+  .drawer-toggle-btn-container {
+    display: flex;
+    justify-content: flex-end;
+    padding: 10px;
+  }
+  
+  @media (max-width:600px){
+    .apply-button{
+        margin: 0;
+        width: auto;
+    }
+  }
