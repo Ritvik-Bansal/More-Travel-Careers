@@ -19,15 +19,16 @@ import {
 import './ApplicantsModal.css';
 
 const JobOpenings = () => {
-  const [jobs, setJobs] = useState();
-  const [applications, setApplications] = useState();
-  const [selectedJobId, setSelectedJobId] = useState();
-  const [loaded, setLoaded] = useState(false);
-  const [open, setOpen] = useState(false);
-  const user = getUser();
-  const [searchTerm, setSearchTerm] = useState('');
+  // State variables
+  const [jobs, setJobs] = useState(); // Stores job listings
+  const [applications, setApplications] = useState(); // Stores job applications
+  const [selectedJobId, setSelectedJobId] = useState(); // Stores ID of selected job
+  const [loaded, setLoaded] = useState(false); // Flag to indicate data loading status
+  const [open, setOpen] = useState(false); // Flag to control modal visibility
+  const user = getUser(); // Retrieve current user
+  const [searchTerm, setSearchTerm] = useState(''); // Stores search term for filtering jobs
 
-  // Filter the job listings based on the search term
+  // Memoized filtered job listings based on search term
   const filteredJobs = useMemo(() => {
     if (!jobs) return [];
     return jobs.filter(
@@ -37,88 +38,86 @@ const JobOpenings = () => {
     );
   }, [jobs, searchTerm]);
 
-  // Handle search term change
+  // Function to handle search term change
   const handleSearchTermChange = (event) => {
     setSearchTerm(event.target.value);
   };
 
+  // Function to open modal
   const handleOpen = () => {
     setOpen(true);
   };
 
+  // Function to close modal
   const handleClose = () => {
     setOpen(false);
   };
 
+  // Effect hook to fetch job listings and applications from Firestore
   useEffect(() => {
-    async function getJobs() {
-      const q = query(collection(db, 'job'));
-      const querySnapshot = await getDocs(q);
-      setLoaded(true);
-      const data = [];
-      querySnapshot.forEach((doc) => {
-        const dt = doc.data();
-        if (!dt.active) {
-          return;
+    async function fetchData() {
+      // Fetch job listings
+      const jobQuery = query(collection(db, 'job'));
+      const jobSnapshot = await getDocs(jobQuery);
+      const jobData = [];
+      jobSnapshot.forEach((doc) => {
+        const job = doc.data();
+        if (job.active) {
+          jobData.push({ ...job, id: doc.id });
         }
-        data.push({ ...dt, id: doc.id });
-        console.log(doc.id, ' => ', doc.data());
       });
-      setJobs(data);
-    }
-    async function getApplications() {
-      const q = query(collection(db, 'application'));
-      const querySnapshot = await getDocs(q);
-      const data = [];
-      querySnapshot.forEach((doc) => {
-        data.push({ ...doc.data(), appId: doc.id });
-        console.log(doc.id, ' => ', doc.data());
+      setJobs(jobData);
+      setLoaded(true);
+
+      // Fetch job applications
+      const applicationQuery = query(collection(db, 'application'));
+      const applicationSnapshot = await getDocs(applicationQuery);
+      const applicationData = [];
+      applicationSnapshot.forEach((doc) => {
+        applicationData.push({ ...doc.data(), appId: doc.id });
       });
-      setApplications(data);
+      setApplications(applicationData);
     }
-    getJobs();
-    getApplications();
+    fetchData();
   }, []);
 
-  const jobMap =
-    useMemo(() => {
-      const map = {};
-      if (!jobs || !applications) return;
-      jobs.forEach((job) => {
-        map[job.id] = applications?.filter((app) => app.jobId === job.id);
-      });
-      return map;
-    }, [jobs, applications]) || {};
+  // Memoized map of jobs to their corresponding applications
+  const jobMap = useMemo(() => {
+    const map = {};
+    if (!jobs || !applications) return {};
+    jobs.forEach((job) => {
+      map[job.id] = applications?.filter((app) => app.jobId === job.id);
+    });
+    return map;
+  }, [jobs, applications]);
 
-  function filterJobsByLocation(location) {
-    console.log({ location });
-
-    console.log({ jobs });
-  }
-
-  // Get the selected location from the query parameter (e.g., ?location=Seattle)
-  const urlParams = new URLSearchParams(window.location.search);
-  const selectedLocation = urlParams.get('location');
-
-  // If a location is selected, filter the job listings
+  // Effect hook to filter jobs by selected location from query parameter
   useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const selectedLocation = urlParams.get('location');
     if (selectedLocation && loaded) {
-      setJobs((jbs) => {
-        const filtered = jbs?.filter(
-          (jb) =>
-            jb?.location?.toLowerCase?.() === selectedLocation?.toLowerCase?.()
+      setJobs((prevJobs) => {
+        const filtered = prevJobs?.filter(
+          (job) =>
+            job?.location?.toLowerCase?.() ===
+            selectedLocation?.toLowerCase?.()
         );
         return [...filtered];
       });
     }
-  }, [selectedLocation, loaded]);
+  }, [loaded]);
 
   return (
     <>
+      {/* Background container */}
       <div className="background-container-job-openings"></div>
 
+      {/* Job openings section */}
       <section id="job-openings">
+        {/* Display loading page while data is being fetched */}
         {!jobs && <LoadingPage />}
+
+        {/* Search bar */}
         <input
           type="text"
           placeholder="Search jobs..."
@@ -126,9 +125,12 @@ const JobOpenings = () => {
           onChange={handleSearchTermChange}
           className="search-bar"
         />
+
+        {/* List of filtered job listings */}
         <ul2>
           {filteredJobs?.map((job) => (
             <li2 data-location={job.location}>
+              {/* Job details */}
               <h3>{job.name}</h3>
               <h5>
                 <pre>
@@ -137,13 +139,13 @@ const JobOpenings = () => {
                 </pre>
               </h5>
               <p>{job.description}</p>
+
+              {/* Conditional rendering based on user role */}
               {isAdmin() ? (
-                <div
-                  style={{ display: 'flex', justifyContent: 'space-between' }}
-                >
+                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                  {/* Button to view applications */}
                   {jobMap[job.id]?.length > 0 && (
                     <Button
-                      //   to={`applications/${job.id}`}
                       variant="contained"
                       onClick={() => {
                         setSelectedJobId(job.id);
@@ -155,6 +157,7 @@ const JobOpenings = () => {
                       }`}
                     </Button>
                   )}
+                  {/* Link to edit job */}
                   <NavLink
                     to={`/admin/${job.id}`}
                     className="cta-button"
@@ -165,7 +168,9 @@ const JobOpenings = () => {
                 </div>
               ) : (
                 <>
+                  {/* Conditional rendering based on user's application status */}
                   {jobMap[job.id]?.some?.((a) => a.user === user?.email) ? (
+                    // Link to view application
                     <NavLink
                       to={`application/${
                         jobMap[job.id]?.find?.((a) => a.user === user?.email)
@@ -176,6 +181,7 @@ const JobOpenings = () => {
                       View Application
                     </NavLink>
                   ) : (
+                    // Link to apply for job
                     <NavLink to={`apply/${job.id}`} className="cta-button">
                       Apply Now
                     </NavLink>
@@ -184,133 +190,11 @@ const JobOpenings = () => {
               )}
             </li2>
           ))}
-          {/* <li2 data-location="Seattle">
-            <h3>Engineer</h3>
-            <h5>
-              <pre>
-                {' '}
-                <i className="fas fa-map-marker-alt"></i> Seattle, WA{' '}
-                <i className="far fa-calendar"></i> 11/27/2023
-              </pre>
-            </h5>
-            <p>
-              Passionate about travel? Join our team as a Travel Consultant,
-              where you'll assist clients in planning and booking memorable
-              trips, providing expert advice on destinations, accommodations,
-              and travel options.
-            </p>
-            <NavLink to="apply" className="cta-button">
-              Apply Now
-            </NavLink>
-          </li2>
-          <li2 data-location="Edmonton">
-            <h3>Customer Service Representative:</h3>
-            <h5>
-              <pre>
-                <i className="fas fa-map-marker-alt"></i> Edmonton, AB{' '}
-                <i className="far fa-calendar"></i> 11/11/2023
-              </pre>
-            </h5>
-            <p>
-              Elevate customer experiences as a Customer Service Representative.
-              Your role involves addressing inquiries, resolving issues, and
-              ensuring our clients receive exceptional support throughout their
-              travel journey.
-            </p>
-            <NavLink to="apply" className="cta-button">
-              Apply Now
-            </NavLink>
-          </li2>
-          <li2 data-location="Seattle">
-            <h3>Sales Representative:</h3>
-            <h5>
-              <pre>
-                <i className="fas fa-map-marker-alt"></i> Seattle, WA{' '}
-                <i className="far fa-calendar"></i> 09/04/2023
-              </pre>
-            </h5>
-            <p>
-              Join us as a Sales Representative and showcase the wonders of
-              travel to our clients. You'll be responsible for selling travel
-              packages, accommodations, and services, turning dreams into
-              unforgettable adventures.
-            </p>
-            <NavLink to="apply" className="cta-button">
-              Apply Now
-            </NavLink>
-          </li2>
-          <li2 data-location="New Delhi">
-            <h3>Travel Coordinator:</h3>
-            <h5>
-              <pre>
-                <i className="fas fa-map-marker-alt"></i> New Delhi, India{' '}
-                <i className="far fa-calendar"></i> 12/04/2023
-              </pre>
-            </h5>
-            <p>
-              Become a Travel Coordinator and orchestrate seamless travel
-              experiences. Manage itineraries, coordinate logistics, and ensure
-              our clients' journeys are well-planned and stress-free.
-            </p>
-            <NavLink to="apply" className="cta-button">
-              Apply Now
-            </NavLink>
-          </li2>
-          <li2 data-location="Seattle">
-            <h3>Digital Marketing Specialist:</h3>
-            <h5>
-              <pre>
-                <i className="fas fa-map-marker-alt"></i> Seattle, WA{' '}
-                <i className="far fa-calendar"></i> 10/28/2023
-              </pre>
-            </h5>
-            <p>
-              Shape the online presence of our travel agency as a Digital
-              Marketing Specialist. Develop and implement digital strategies to
-              promote our services, engage audiences, and inspire wanderlust.
-            </p>
-            <NavLink to="apply" className="cta-button">
-              Apply Now
-            </NavLink>
-          </li2>
-          <li2 data-location="Edmonton">
-            <h3>Technology and Systems Manager:</h3>
-            <h5>
-              <pre>
-                <i className="fas fa-map-marker-alt"></i> Edmonton, AB{' '}
-                <i className="far fa-calendar"></i> 09/27/2023
-              </pre>
-            </h5>
-            <p>
-              Join our tech-savvy team as a Technology and Systems Manager.
-              Oversee the smooth operation of our booking systems and website,
-              ensuring that our technological infrastructure enhances the travel
-              experience.
-            </p>
-            <NavLink to="apply" className="cta-button">
-              Apply Now
-            </NavLink>
-          </li2>
-          <li2 data-location="Edmonton">
-            <h3>Corporate Travel Consultant:</h3>
-            <h5>
-              <pre>
-                <i className="fas fa-map-marker-alt"></i> Edmonton, AB{' '}
-                <i className="far fa-calendar"></i> 10/18/2023
-              </pre>
-            </h5>
-            <p>
-              Navigate the world of business travel as a Corporate Travel
-              Consultant. Specialize in arranging business trips, managing
-              corporate accounts, and providing top-notch service to our
-              corporate clients.
-            </p>
-            <NavLink to="apply" className="cta-button">
-              Apply Now
-            </NavLink>
-          </li2> */}
+          {}
         </ul2>
       </section>
+
+      {/* Modal for displaying applicants */}
       <Modal
         open={open}
         onClose={handleClose}
@@ -320,9 +204,11 @@ const JobOpenings = () => {
       >
         <Fade in={open}>
           <div className="applicants-modal">
+            {/* Title */}
             <Typography variant="h5" gutterBottom>
               Applicants List
             </Typography>
+            {/* List of applicants */}
             <List>
               {jobMap[selectedJobId] &&
                 jobMap[selectedJobId].map((applicant) => (
@@ -332,6 +218,7 @@ const JobOpenings = () => {
                     component={NavLink}
                     to={`application/${applicant.appId}`}
                   >
+                    {/* Applicant details */}
                     <ListItemText
                       primary={applicant.name}
                       secondary={applicant.email}

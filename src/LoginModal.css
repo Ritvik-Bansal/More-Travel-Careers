@@ -1,32 +1,35 @@
+/* Styling for the modal paper container */
 .paper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 500px;
-    margin: auto;
-    top: 50%;
-    position: absolute;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
- 
-  
-  .button {
-    margin-top: 16px !important;
-  }
+  display: flex; /* Display as flex container */
+  flex-direction: column; /* Arrange children vertically */
+  align-items: center; /* Center items horizontally */
+  width: 500px; /* Set width */
+  margin: auto; /* Center horizontally */
+  top: 50%; /* Position from top */
+  position: absolute; /* Position absolutely */
+  left: 50%; /* Position from left */
+  transform: translate(-50%, -50%); /* Center both horizontally and vertically */
+}
 
-  .form{
-    box-shadow: none !important;
-    margin: auto;
+/* Styling for buttons */
+.button {
+  margin-top: 16px !important; /* Add margin on top */
+}
+
+/* Styling for the form */
+.form {
+  box-shadow: none !important; /* Remove box shadow */
+  margin: auto; /* Center horizontally */
+}
+
+/* Media query for smaller screens */
+@media (max-width: 600px) {
+  .paper {
+    width: 90%; /* Adjust width for smaller screens */
   }
-  
-  /* Adjustments for smaller screens */
-  @media (max-width: 600px) {
-    .paper {
-      width: 90%;
-    }
-  }
-  
-  .MuiTabs-root{
-    margin-bottom: 20px;
-  }
+}
+
+/* Styling for MUI Tabs */
+.MuiTabs-root {
+  margin-bottom: 20px; /* Add margin at the bottom */
+}
