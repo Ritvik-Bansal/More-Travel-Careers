@@ -111,3 +111,5 @@ function MyComponent() {
     </div>
   );
 }
+
+export default MyComponent

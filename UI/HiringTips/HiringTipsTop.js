@@ -109,7 +109,7 @@ function App() {
 
   return (
     <div className="flex flex-col">
-      <header className="flex gap-5 justify-between self-center px-5 w-full text-lg max-w-[1271px] max-md:flex-wrap max-md:max-w-full">
+      {/* <header className="flex gap-5 justify-between self-center px-5 w-full text-lg max-w-[1271px] max-md:flex-wrap max-md:max-w-full">
         <div className="shrink-0 rounded-full bg-zinc-300 h-[46px] w-[46px]" />
         <nav className="flex gap-5 my-auto text-black max-md:flex-wrap">
           <a href="#">Home</a>
@@ -136,7 +136,7 @@ function App() {
             LOGIN
           </a>
         </div>
-      </header>
+      </header> */}
       <HeroSection />
       <main className="mt-16 w-full max-md:mt-10 max-md:max-w-full">
         <div className="flex gap-5 max-md:flex-col max-md:gap-0">

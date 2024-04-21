@@ -223,10 +223,18 @@ return (
           Upload your Resume and Information will automatically be filled in!
         </label>
         <br />
+        <label htmlFor="resume" id="label-resume">
+          -----------------------------------------------------------------------------
+        </label>
         <br />
         {/* Input field for resume upload */}
         <input id="resume" type="file" onChange={handleFileChange} />
+        <br />
+        <label htmlFor="resume" id="label-resume">
+          -----------------------------------------------------------------------------
+        </label>
         <br /> <br />
+
         {/* 
         <h3>OR</h3> */}
 
@@ -455,48 +463,7 @@ return (
           </div>
 
           {/* Position applied and questions/concerns section */}
-          <div class="form-control">
-            {/* Radio buttons for position selection */}
-            <label>What position are you applying to?</label>
-            <label htmlFor="recommed-1">
-              <input type="radio" id="recommed-1" name="recommed" />
-              Travel Consultant
-            </label>
-            <label htmlFor="recommed-2">
-              <input type="radio" id="recommed-2" name="recommed" />
-              Customer Service Representative
-            </label>
-            <label htmlFor="recommed-3">
-              <input type="radio" id="recommed-3" name="recommed" />
-              Sales Representative
-            </label>
-            <label htmlFor="recommed-4">
-              <input type="radio" id="recommed-4" name="recommed" />
-              Travel Coordinator
-            </label>
-            <label htmlFor="recommed-5">
-              <input type="radio" id="recommed-5" name="recommed" />
-              Digital Marketing Specialist
-            </label>
-            <label htmlFor="recommed-6">
-              <input type="radio" id="recommed-6" name="recommed" />
-              Technology and Systems Manager
-            </label>
-            <label htmlFor="recommed-7">
-              <input type="radio" id="recommed-7" name="recommed" />
-              Corporate Travel Consultant
-            </label>
-
-            {/* Textarea for questions/concerns */}
-            <label htmlFor="comment">Questions/Concerns</label>
-            <textarea
-              name="questions"
-              id="questions"
-              placeholder="Enter your questions here"
-              value={formData.questions}
-              onChange={handleChange}
-            ></textarea>
-          </div>
+  
 
           {/* Submit button */}
           {!prefilled && (

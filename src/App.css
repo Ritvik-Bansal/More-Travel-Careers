@@ -22,7 +22,7 @@ body {
   font-family: Verdana, sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #fff5ec;
+  background-color: #ffffff;
   color: #333;
 }
 
@@ -149,7 +149,7 @@ body.home-page {
   position: relative;
   background: url('/public/main-images/application.png') top center no-repeat;
   background-size: 100%; /* Adjust to 'cover', 'auto', '50%', etc. based on your preference */
-  height: 270px; /* Adjust the height as needed */
+  height: 250px; /* Adjust the height as needed */
   overflow: hidden; /* Ensure that the text overlay doesn't overflow */
 }
 
@@ -220,16 +220,13 @@ li2.hidden {
 /* Form container styles */
 .form-container {
   max-width: 600px;
-  margin: 20px auto;
   padding: 20px;
   background-color: #fff;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 #form{
-  max-width: 800px; /* Adjust the value as needed */
-  margin-top: 100px auto; /* Center the form horizontally */
-  border-radius: 15px;
+  max-width: 100%; /* Adjust the value as needed */
+  border-radius: 0px;
 }
 
 /* Form control styles */
@@ -304,7 +301,7 @@ header {
   top: 0;
   left: 0;
   width: 100%;
-  background-color: #fff5ec; /* Change this to your desired grey color */
+  background-color: #ffffff; /* Change this to your desired grey color */
   color: rgb(0, 0, 0);
   text-align: center;
   padding: 20px;
@@ -549,7 +546,6 @@ button {
 form {
   background-color: #fff;
   max-width: 500px;
-  margin: 50px auto;
   padding: 30px 20px;
   box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.5);
 }
@@ -855,6 +851,7 @@ header h2 {
 
 .testimonial img {
   width: 200px;
+  align-items: center;
   border-radius: 50%;
   margin-bottom: 15px;
   border: 3px solid #fff;
@@ -1118,7 +1115,6 @@ section#home-section {
 /* Apply styles to the footer */
 footer {
   text-align: center;
-  margin-top: 40px;
   padding: 20px;
   background-color: #333;
   color: white;
@@ -1184,7 +1180,7 @@ header {
   top: 0;
   left: 0;
   width: 100%;
-  background-color: #fff5ec; /* Change this to your desired grey color */
+  background-color: #ffffff; /* Change this to your desired grey color */
   color: rgb(0, 0, 0);
   text-align: center;
   padding: 5px;

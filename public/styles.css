@@ -243,9 +243,9 @@ li2.hidden {
 }
 
 #form{
-    max-width: 370px; /* Adjust the value as needed */
+    max-width: 100%; /* Adjust the value as needed */
     margin-top: 10px auto; /* Center the form horizontally */
-    border-radius: 15px;
+    border-radius: 0px;
 }
 
 /* Form control styles */
@@ -257,7 +257,7 @@ li2.hidden {
 .form h5 {
     color: #333;
     margin-bottom: 15px;
-    margin-lfet: 10px;
+    margin-left: 10px;
     transition: color 0.3s ease-in-out;
 }
 
