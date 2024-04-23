@@ -3,66 +3,55 @@ import { NavLink } from 'react-router-dom';
 import './App.css';
 
 function App() {
-  function searchLocation() {
-    const locationInput = document.getElementById('locationInput');
-    const userInput = locationInput.value.trim().toLowerCase();
 
-    // List of available locations (convert them to lowercase)
-    const locations = ['seattle', 'new delhi', 'edmonton'];
+  // Function to handle autocomplete functionality for location input
+function autocomplete() {
+  // Get references to DOM elements
+  const locationInput = document.getElementById('locationInput'); // Input field for location
+  const suggestionsContainer = document.getElementById('suggestions-container'); // Container for displaying suggestions
 
-    // Checks if the user input matches one of the predefined locations
-    if (locations.includes(userInput)) {
-      // Redirects to job-openings with the selected location
-      window.location.href =
-        'job-openings?location=' + encodeURIComponent(userInput);
-    } else {
-      // Shows an alert for invalid location
-      alert('No jobs available in this location.');
-    }
-  }
+  // List of available locations
+  const locations = ['Seattle', 'New Delhi', 'Edmonton'];
 
-  function autocomplete() {
-    const locationInput = document.getElementById('locationInput');
-    const suggestionsContainer = document.getElementById(
-      'suggestions-container'
-    );
+  // Clear previous suggestions
+  suggestionsContainer.innerHTML = '';
 
-    // List of available locations
-    const locations = ['Seattle', 'New Delhi', 'Edmonton'];
+  // Get user input
+  const userInput = locationInput.value.toLowerCase();
 
-    // Clear previous suggestions
-    suggestionsContainer.innerHTML = '';
+  // Filter locations based on user input
+  const filteredLocations = locations.filter((location) =>
+    location.toLowerCase().includes(userInput)
+  );
 
-    // Get user input
-    const userInput = locationInput.value.toLowerCase();
-
-    // Filter locations based on user input
-    const filteredLocations = locations.filter((location) =>
-      location.toLowerCase().includes(userInput)
-    );
-
-    // Display suggestions
-    filteredLocations.forEach((location) => {
-      const suggestionItem = document.createElement('li');
-      suggestionItem.innerText = location;
-      suggestionItem.addEventListener('click', () => {
-        locationInput.value = location;
-        suggestionsContainer.innerHTML = '';
-      });
-
-      // Add some styling for spacing
-      suggestionItem.style.margin = '2px'; // Adjust the value as needed
-
-      suggestionsContainer.appendChild(suggestionItem);
+  // Display suggestions
+  filteredLocations.forEach((location) => {
+    // Create a new list item for each suggestion
+    const suggestionItem = document.createElement('li');
+    // Set the text of the list item to the location
+    suggestionItem.innerText = location;
+    // Add click event listener to set location input value when suggestion is clicked
+    suggestionItem.addEventListener('click', () => {
+      locationInput.value = location;
+      // Clear suggestions container after selection
+      suggestionsContainer.innerHTML = '';
     });
 
-    // Show or hide suggestions container
-    if (filteredLocations.length > 0) {
-      suggestionsContainer.style.display = 'block';
-    } else {
-      suggestionsContainer.style.display = 'none';
-    }
+    // Add some styling for spacing
+    suggestionItem.style.margin = '2px'; // Adjust the value as needed
+
+    // Append the suggestion item to the suggestions container
+    suggestionsContainer.appendChild(suggestionItem);
+  });
+
+  // Show or hide suggestions container based on the number of filtered locations
+  if (filteredLocations.length > 0) {
+    suggestionsContainer.style.display = 'block'; // Show suggestions container
+  } else {
+    suggestionsContainer.style.display = 'none'; // Hide suggestions container
   }
+}
+
 
   return (
     <div className="App">
